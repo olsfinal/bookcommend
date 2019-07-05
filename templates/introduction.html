@@ -1,0 +1,129 @@
+{%extends "base.html"%}
+{%block header%}
+<title>商品页面</title>
+<link href="./static/css/floating-labels.css" rel="stylesheet">
+<style type="text/css">
+    .ct-star {
+        display: inline-block;
+        margin: 0 1px;
+        width: 30px;
+        height: 30px;
+        background: url(./static/img/star.png) no-repeat;
+        vertical-align: -2px;
+        cursor: pointer;
+    }
+
+    .ic-star-off {
+        /*
+                background-position: -39px 0;
+        */
+        background: url(./static/img/unstar.png) no-repeat;
+
+    }
+</style>
+<script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+{%endblock%}
+
+{%block navbar%}
+<form class="form-inline mt-2 mt-md-0" method="post" id="search" action="./basicshow">
+    <input class="form-control mr-sm-2" type="text" name="InputKeyWord" placeholder="搜索">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+{%if name%}
+<a class="btn btn-outline-success my-2 my-sm-0" href="./logout">logout {{name}}</a>
+{%else%}
+<a class="btn btn-outline-success my-2 my-sm-0" href="./login">login</a>
+{%endif%}
+{%endblock%}
+
+{% block mainbody%}
+<div class="container text-center" >
+    <br><br><br><br><br><br>
+    <h1>图书销售</h1><br>
+    {%for result in results%}
+    <div class="col-md-10">
+        <img src="{{result.img}}" height="500" width="500">
+        <br>
+        <h3>{{result.name}}</h3>
+        <span class="star">
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <b class="ct-star  ic-star-off"></b>
+        <button class="btn btn-primary" type="submit">确定</button>
+        <button class="btn btn-primary" type="submit">清空</button>
+        </span>
+        <br>
+        <span class="star-txt"></span><br>
+        <h4>网友评分：{{result.grades}}</h4>
+        <a href="#">{{result.description}} </a><br>
+        <p>{{result.details}}</p>
+        <!--<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
+    </div>
+    {%endfor%}
+</div>
+
+<script>
+    window.onload = function () {
+        var aSpan = document.getElementsByClassName("star")[0];
+        var aStxt = document.getElementsByClassName("star-txt")[0];
+        var aBstar = aSpan.getElementsByTagName("b");
+        var arrBtxt = ["很差", "较差", "还行", "推荐", "力荐"];
+        var num = 0;
+        var onOff = true;
+        for (var i = 0; i < aBstar.length; i++) {
+            aBstar[i].index = i;
+            //鼠标移入
+            aBstar[i].onmouseover = function () {
+                if (onOff) {
+                    num = this.index;
+                    aStxt.innerHTML = arrBtxt[parseInt(num/2)];
+                    for (var i = 0; i <= this.index; i++) {
+                        //aBstar[i].style.backgroundPosition = "0 0";
+                        aBstar[i].style.backgroundImage = "url(./static/img/star.png)";
+                    }
+                }
+            };
+            //鼠标移开
+            aBstar[i].onmouseout = function () {
+                if (onOff) {//设定个开关，等开关为真就执行鼠标移除的代码
+                    aStxt.innerHTML = "";
+                    for (var i = 0; i <= this.index; i++) {
+                        //aBstar[i].style.backgroundPosition = "-39px 0";
+                        aBstar[i].style.backgroundImage = "url(./static/img/unstar.png)";
+                    }
+                }
+            };
+            //鼠标点击
+            aBstar[i].onclick = function () {
+                onOff = false;//开关为假就不执行鼠标移除的代码
+                //先清空
+                aStxt.innerHTML = "";
+                for (var i = 0; i < 10; i++) {
+                    //aBstar[i].style.backgroundPosition = "-39px 0";
+                    aBstar[i].style.backgroundImage = "url(./static/img/unstar.png)";
+
+                }
+                //点击当前星星，之前的都点亮包含自己
+                num = this.index;
+                aStxt.innerHTML = arrBtxt[parseInt(num/2)];
+
+                //alert(num);
+                for (var i = 0; i <= this.index; i++) {
+                    //aBstar[i].style.backgroundPosition = "0 0";
+                    aBstar[i].style.backgroundImage = "url(./static/img/star.png)";
+                }
+                $.post('http://127.0.0.1:5000/star', {'Rank': num+1});
+
+            };
+        }
+    }
+
+</script>
+{%endblock%}
