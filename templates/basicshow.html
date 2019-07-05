@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block header %}
+<title>搜索引擎</title>
+<link href="./static/css/floating-labels.css" rel="stylesheet">
+<script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+
+{% endblock %}
+
+
+{%block navbar%}
+<form class="form-inline mt-2 mt-md-0" method="post" id="search" action="./basicshow">
+    <input class="form-control mr-sm-2" type="text" name="InputKeyWord" placeholder="搜索">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+{%if name%}
+<a class="btn btn-outline-success my-2 my-sm-0" href="./logout">logout {{name}}</a>
+{%else%}
+<a class="btn btn-outline-success my-2 my-sm-0" href="./login">login</a>
+{%endif%}
+{%endblock%}
+
+
+{% block mainbody%}
+<!--    <form class="form-signin" method="post" id="search" action="./basicshow">
+      <div class="text-center mb-4">
+        &lt;!&ndash;<img class="mb-4" src="./static//bootstrap-solid.svg" alt="" width="72" height="72">&ndash;&gt;
+        <h1 class="h3 mb-3 font-weight-normal">音乐搜索引擎</h1>
+          {%if name%} <h2 class="h4 mb-3"> 欢迎,{{name}} </h2><br>
+          {%else%} <a href="./login">点击我登录</a>
+          {%endif%}
+      </div>
+	  <br>
+
+      <div class="form-label-group">
+        <input type="text" id="InputKeyword" class="form-control" name="InputKeyWord" placeholder="搜索">
+        <label for="InputKeyword">搜索</label>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit" >搜索</button>
+        <br><br><br>
+        <div class="text-center">
+            <h2 class="h4 mb-5 font-weight-normal">日推</h2>
+            &lt;!&ndash;<div class="table-responsive">&ndash;&gt;
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>描述</th>
+                        <th>歌名</th>
+                        <th>歌手</th>
+                        <th>专辑名称</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for result in results %}
+                    <tr onclick=clickaction(this)>
+                        <td>{{result.description}}</td>
+                        <td>{{result.songname}}</td>
+                        <td>{{result.singer}}</td>
+                        <td>{{result.album}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+
+    </form>-->
+<div class="jumbotron">
+    <div class="container">
+        <!-- Example row of columns -->
+        <!--<br><br><br><br><br><br><br><br><br><br><br><br>-->
+        <h2>搜索结果</h2>
+        <div class="row">
+            {%for result in results%}
+            <div class="col-md-4" onclick="clickaction(this)">
+                <img src="{{result.img}}" height="210" width="210">
+                <br>
+                <p>{{result.name}}</p>
+                <a href="#">{{result.description}} </a>
+                <!--<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
+            </div>
+            {%endfor%}
+        </div>
+        <br>
+        <!--<h2>TOP20销量榜</h2>-->
+        <!--<div class="row">-->
+            <!--{%for result in results%}-->
+            <!--<div class="col-md-4">-->
+                <!--<img src="{{result.img}}" height="210" width="210">-->
+                <!--<br>-->
+                <!--<p>{{result.name}}</p>-->
+                <!--<a href="#">{{result.description}} </a>-->
+                <!--&lt;!&ndash;<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>&ndash;&gt;-->
+            <!--</div>-->
+            <!--{%endfor%}-->
+        <!--</div>-->
+    </div>
+</div>
+<script>
+    function clickaction(div) {
+        //for (i = 0; i < 10; i++) {
+            var key = div.childNodes[5].innerText;
+            //alert(click);
+        //$.post('http://127.0.0.1:5000/introduction', {'Name': key});
+        //}
+        var form = $("<form method='post'></form>"),
+           input;
+       form.attr({"action":'http://127.0.0.1:5000/introduction'});
+       //$.each(args,function(key,value){
+
+       	//alert(key);
+       //	alert(value);
+           input = $("<input type='hidden'>");
+           input.attr({"Name":"Name"});
+           input.val(key);
+           form.append(input);
+       //});
+       $(document.body).append(form);
+       form.submit();
+    }
+</script>
+{% endblock %}
+
+
+
+
