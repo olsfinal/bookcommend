@@ -7,7 +7,7 @@ app = Flask(__name__)
 def login():
     error = None
     if request.method == 'POST':
-        if (request.form['Username'] == "obama" or requst.form['Username'] == "admin"):
+        if (request.form['Username'] == "obama" or request.form['Username'] == "admin"):
             session['username'] = request.form['Username']
             return redirect(url_for('index'))
         else:
