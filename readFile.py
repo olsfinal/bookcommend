@@ -79,6 +79,7 @@ def countKeys(dic):
     # plt.show()
 
 
-# getItem("BX-Books.csv")
+book=getItem("BX-Books.csv")
+# print(book)
 # users,books=getRating()
 # countKeys(books)
