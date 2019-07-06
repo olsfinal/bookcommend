@@ -57,7 +57,7 @@
         <b class="ct-star  ic-star-off"></b>
         <b class="ct-star  ic-star-off"></b>
         <button class="btn btn-primary" type="submit">确定</button>
-        <button class="btn btn-primary" type="submit">清空</button>
+        <button class="btn btn-primary" type="submit" id="clear">清空</button>
         </span>
         <br>
         <span class="star-txt"></span><br>
@@ -74,6 +74,7 @@
         var aSpan = document.getElementsByClassName("star")[0];
         var aStxt = document.getElementsByClassName("star-txt")[0];
         var aBstar = aSpan.getElementsByTagName("b");
+        var clearButton = document.getElementById("clear");
         var arrBtxt = ["很差", "较差", "还行", "推荐", "力荐"];
         var num = 0;
         var onOff = true;
@@ -121,6 +122,10 @@
                 }
                 $.post('http://127.0.0.1:5000/star', {'Rank': num+1});
 
+            };
+            clearButton.onclick = function(){
+                onOff = false;
+                aStxt.innerHTML = "";
             };
         }
     }
