@@ -27,8 +27,8 @@ def getItem(filename):
                 items[item[0]]=item[1:]
             except:
                 continue
-        for i in items:
-            print(items[i])
+        # for i in items:
+        #     print(items[i])
         return items
 
 def getRating():
@@ -79,7 +79,7 @@ def countKeys(dic):
     # plt.show()
 
 
-book=getItem("BX-Books.csv")
+# book=getItem("BX-Books.csv")
 # print(book)
 # users,books=getRating()
 # countKeys(books)

@@ -55,14 +55,16 @@ def topn_similar(itemID, data, n=10):
             similar=cosinDistance(itemID,itemid,data_copy)
             res.append((itemid,similar))
     res.sort(key=lambda val:val[1],reverse=True)
-    print(res)
+    # print(res)
     return res[:n]
 
 
 # 根据用户推荐电影给其他人
-def CFRecommend(user, data):
+def CFRecommend(user, data,n=10):
     # 相似度最高的用户
     items={}
+    if user not in data:
+        return
     for i in range(5):
         items.update(data[topn_similar(user, data)[i][0]])
     # print(top_sim_user)
@@ -76,9 +78,9 @@ def CFRecommend(user, data):
             recommendations.append((item, items[item]))
     recommendations.sort(key=lambda val: val[1], reverse=True)  # 按照评分排序
     # 返回评分最高的10部电影
-    return recommendations[:10]
+    return recommendations[:n]
 
-def mostRecommend(data):
+def mostRecommend(data,n=10):
     avg_data=[]
     for key in data:
         items=data[key]
@@ -87,7 +89,7 @@ def mostRecommend(data):
         if avg>=5 and len(items)>5:
             avg_data.append((key,avg))
     avg_data.sort(key=lambda val: val[1], reverse=True)
-    return avg_data[:10]
+    return avg_data[:n]
 
 
 
@@ -97,5 +99,5 @@ def mostRecommend(data):
 # RES = topn_simliar('265889',userData)
 # print(RES)
 
-# rcm=mostRecommend(userData)
+# rcm=mostRecommend(bookData)
 # print(rcm)

@@ -12,11 +12,11 @@ default_index = open_dir(index_filepath, indexname='book')  # 读取建立好的
 default_facet = []
 default_facet.append(sorting.ScoreFacet())
 # default_facet.append(FieldFacet("album_title", reverse=True))  # 按序排列搜索结果
-default_facet.append(FieldFacet("book_tittle", reverse=True))
+default_facet.append(FieldFacet("book_title", reverse=True))
 
 # 默认查询为and模式，默认范围为全选
 default_group=qparser.syntax.AndGroup
-default_range=['book_tittle','book_author','year','publisher','ISBN']
+default_range=['book_title','book_author','year','publisher','ISBN']
 
 
 
@@ -59,7 +59,7 @@ def normal_searching(query,mode):
     if mode == 0:
         return do_searching(query)
     elif mode == 1:
-        return do_searching(query,search_range=['book_tittle'])#
+        return do_searching(query,search_range=['book_title'])#
     elif mode == 2:
         return do_searching(query,search_range=['book_author'])#
     elif mode == 3:
@@ -93,8 +93,21 @@ def advanced_searching(and_query,or_query,search_range):
         # print(result[qp])
     return result
 
-do_searching("tropical",search_range=["book_tittle"])
+# do_searching("0671039741",search_range=["ISBN"])
 # normal_searching('后来',mode=2)
 # print(basic_search('爱','album_title'))
 
 # advanced_searching('后来','我们 哭了',default_range)
+
+# 0786869216
+# 0671039741
+# 0385498721
+# 0156012197
+# 0439139597
+# 0345339495
+# 0140042598
+# 0060529709
+# 068486424X
+# 0451179285
+# 0385720467
+# 0385512104

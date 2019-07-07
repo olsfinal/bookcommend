@@ -73,25 +73,26 @@
         <!-- Example row of columns -->
         <h2>TOP20气人榜</h2>
         <div class="row">
-            {%for result in results%}
+            {%for hot in hots%}
             <div class="col-md-4" onclick="clickaction(this)">
-                <img src="{{result.img}}" height="210" width="210">
+                <img src="{{hot.img}}" height="210" width="210">
                 <br>
-                <p>{{result.name}}</p>
-                <a href="#">{{result.description}} </a>
+                <a href="#">name:  {{hot.name}} </a>
+                <p>author:  {{hot.author}}</p>
                 <!--<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
             </div>
             {%endfor%}
         </div>
         <br>
-        <h2>TOP20销量榜</h2>
+        <h2>TOP20推荐榜</h2>
         <div class="row">
-            {%for result in results%}
+            {%for recommend in recommends%}
             <div class="col-md-4" onclick="clickaction(this)">
-                <img src="{{result.img}}" height="210" width="210">
+                <img src="{{recommend.img}}" height="210" width="210">
                 <br>
-                <p>{{result.name}}</p>
-                <a href="#">{{result.description}} </a>
+                <a href="#">name: {{recommend.name}} </a>
+                <p>author: {{recommend.author}}</p>
+
                 <!--<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
             </div>
             {%endfor%}
