@@ -65,7 +65,7 @@ def introcution():
             }
         ]
         print(value)
-        return render_template('introduction.html', results=results)
+        return render_template('introduction.html', name=name,results=results)
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -194,7 +194,7 @@ def basicshow():
             }
         ]
         print(value)
-        return render_template('basicshow.html', results=results)
+        return render_template('basicshow.html', name=name,results=results)
 
 
 
@@ -207,59 +207,59 @@ def star():
         return ''
 
 
-@app.route('/advancedshow', methods=['GET', 'POST'])
-def advancedshow():
-    if request.method == 'GET':
-        return render_template('pagenotfound.html')
-    elif request.method == 'POST':
-        # str = request.values.to_dict()
-        str = request.values.to_dict()
-        # print(str)
-        # print(list(str))
-        results = []
-        if 'Sort' in str:
-            key = session['SearchHistory']  # 获取搜索记录
-            sort = str['Sort']
-            if sort == '1':  # 重新排序代码
-                print(sort)
-            elif sort == '2':
-                print(sort)
-            elif sort == '3':
-                print(sort)
-            elif sort == '4':
-                print(sort)
-            return render_template('advancedshow.html', results=results)
-
-        if 'SearchHistory' in session:
-            value = list(session['SearchHistory'])
-        else:
-            value = []
-        value.append(str)  ##STR需要处理
-        # print(value)
-        key = {'SearchHistory': value}
-        session.update(key)
-        # print(session)
-        # print(str.values())
-
-        # 搜索处理
-
-        results = [
-            {
-                'songname': 'In my life',
-                'description': 'LaLaLa',
-                'singer': 'Beatles',
-                'album': 'Only One',
-                'lyrics': 'in my life love them all'
-            },
-            {
-                'songname': 'Photograph',
-                'description': 'Ed sheeran\'s song',
-                'singer': 'Ed sheeran',
-                'album': 'X',
-                'lyrics': 'Loving can hurt, loving can hurt sometimes'
-            }
-        ]
-    return render_template('advancedshow.html', results=results)
+# @app.route('/advancedshow', methods=['GET', 'POST'])
+# def advancedshow():
+#     if request.method == 'GET':
+#         return render_template('pagenotfound.html')
+#     elif request.method == 'POST':
+#         # str = request.values.to_dict()
+#         str = request.values.to_dict()
+#         # print(str)
+#         # print(list(str))
+#         results = []
+#         if 'Sort' in str:
+#             key = session['SearchHistory']  # 获取搜索记录
+#             sort = str['Sort']
+#             if sort == '1':  # 重新排序代码
+#                 print(sort)
+#             elif sort == '2':
+#                 print(sort)
+#             elif sort == '3':
+#                 print(sort)
+#             elif sort == '4':
+#                 print(sort)
+#             return render_template('advancedshow.html', results=results)
+#
+#         if 'SearchHistory' in session:
+#             value = list(session['SearchHistory'])
+#         else:
+#             value = []
+#         value.append(str)  ##STR需要处理
+#         # print(value)
+#         key = {'SearchHistory': value}
+#         session.update(key)
+#         # print(session)
+#         # print(str.values())
+#
+#         # 搜索处理
+#
+#         results = [
+#             {
+#                 'songname': 'In my life',
+#                 'description': 'LaLaLa',
+#                 'singer': 'Beatles',
+#                 'album': 'Only One',
+#                 'lyrics': 'in my life love them all'
+#             },
+#             {
+#                 'songname': 'Photograph',
+#                 'description': 'Ed sheeran\'s song',
+#                 'singer': 'Ed sheeran',
+#                 'album': 'X',
+#                 'lyrics': 'Loving can hurt, loving can hurt sometimes'
+#             }
+#         ]
+#     return render_template('advancedshow.html', results=results)
 
 
 @app.route('/searchhistory', methods=['GET'])
