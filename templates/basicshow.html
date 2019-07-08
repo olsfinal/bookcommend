@@ -74,8 +74,10 @@
             <div class="col-md-4" onclick="clickaction(this)">
                 <img src="{{result.img}}" height="210" width="210">
                 <br>
-                <p>{{result.name}}</p>
-                <a href="#">{{result.description}} </a>
+                <a href="#">{{result.name}} </a>
+                <br>
+                <p>author:  {{result.author}}</p>
+                <p>year:  {{result.year}}</p>
                 <!--<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
             </div>
             {%endfor%}
