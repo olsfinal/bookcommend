@@ -74,7 +74,7 @@
         <h2>TOP20气人榜</h2>
         <div class="row">
             {%for hot in hots%}
-            <div class="col-md-4" onclick="clickaction(this)">
+            <div class="col-md-4">
                 <img src="{{hot.img}}" height="210" width="210">
                 <br>
                 <a href="/introduction?ISBN={{hot.ISBN}}">name:  {{hot.name}} </a>
@@ -87,7 +87,7 @@
         <h2>TOP20推荐榜</h2>
         <div class="row">
             {%for recommend in recommends%}
-            <div class="col-md-4" onclick="clickaction(this)">
+            <div class="col-md-4">
                 <img src="{{recommend.img}}" height="210" width="210">
                 <br>
                 <a href="/introduction?ISBN={{recommend.ISBN}}">name: {{recommend.name}} </a>
