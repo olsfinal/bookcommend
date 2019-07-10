@@ -1,5 +1,5 @@
-{%extends "base.html"%}
-{%block header%}
+{% extends "base.html" %}
+{% block header %}
 <title>商品页面</title>
 <link href="./static/css/floating-labels.css" rel="stylesheet">
 <style type="text/css">
@@ -37,6 +37,7 @@
 {%endblock%}
 
 {% block mainbody%}
+<body onload="onload(book_rating_user);" >
 <div class="container text-center" >
     <br><br><br><br><br><br>
     <h1>图书销售</h1><br>
@@ -44,7 +45,10 @@
     <div class="col-md-10">
         <img src="{{result.img}}" height="500" width="500">
         <br>
-        <h3>{{result.name}}</h3>
+        <h3>书名：{{result.name}}</h3>
+        <h4>作者：{{result.author}}</h4>
+        <h5>出版社：{{result.publisher}} </h5>
+        <h6>出版时间：{{result.year}}</h6>
         <span class="star">
         <b class="ct-star  ic-star-off"></b>
         <b class="ct-star  ic-star-off"></b>
@@ -61,16 +65,16 @@
         </span>
         <br>
         <span class="star-txt"></span><br>
-        <h4>网友评分：{{result.grades}}</h4>
-        <a href="#">{{result.description}} </a><br>
-        <p>{{result.details}}</p>
+        <h4>网友评分：{{book_rating_all}}</h4>
+        <!--<a href="#">{{result.publisher}} </a><br>-->
+        <!--<p>{{result.year}}</p>-->
         <!--<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>-->
     </div>
     {%endfor%}
 </div>
-
+</body>
 <script>
-    window.onload = function () {
+    window.onload = function (book_rating_user) {
         var aSpan = document.getElementsByClassName("star")[0];
         var aStxt = document.getElementsByClassName("star-txt")[0];
         var aBstar = aSpan.getElementsByTagName("b");
@@ -79,6 +83,12 @@
         var num = 0;
         var lastNum = 0;
         var onOff = true;
+        num = book_rating_user;
+        aStxt.innerHTML = arrBtxt[parseInt(num/2)];
+        for (var i = 0; i <= book_rating_user; i++) {
+            //aBstar[i].style.backgroundPosition = "0 0";
+            aBstar[i].style.backgroundImage = "url(./static/img/star.png)";
+        }
         for (var i = 0; i < aBstar.length; i++) {
             aBstar[i].index = i;
             //鼠标移入

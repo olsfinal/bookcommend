@@ -29,7 +29,7 @@ def basic_search(query,query_parse,group=default_group,facet=default_facet,index
     parser.add_plugin(qparser.SequencePlugin())
     parser.add_plugin(qparser.FuzzyTermPlugin())
     results = searcher.search(myquery, limit=None, sortedby=facet)  # limit为搜索结果的限制，默认为10，详见博客开头的官方文档
-    print(results)
+    # print(results)
     return results
 
 # 基本的循环查询，返回字典
@@ -50,7 +50,7 @@ def do_searching(query,search_range=default_range,group=default_group,index=defa
             return_dict=dict(result) # detail: {'album_title': 'xxx', 'song_author': 'xx', 'song_id': '123', 'song_lrc': '...
             song_detail[return_dict['ISBN']]=return_dict
         result_dict[qp]=song_detail
-        print(song_detail)
+        # print(song_detail)
     # 返回的格式: {'search_range':{'song_id':'detail'}}
     return result_dict
 
@@ -97,7 +97,7 @@ def advanced_searching(and_query,or_query,search_range):
 # normal_searching('后来',mode=2)
 # print(basic_search('爱','album_title'))
 
-# advanced_searching('后来','我们 哭了',default_range)
+# print(do_searching('0441805841'))
 
 # 0786869216
 # 0671039741
