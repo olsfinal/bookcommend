@@ -63,8 +63,8 @@
         <button class="btn btn-primary" type="submit">确定</button>
         <!--<button class="btn btn-primary" type="submit" id="clear">清空</button>-->
         </span>
-        <br>
-        <span class="star-txt"></span><br>
+        <h4>你的评分：{{book_rating_user}}</h4>
+        <span class="star-txt"></span>
         <h4>网友评分：{{book_rating_all}}</h4>
         <!--<a href="#">{{result.publisher}} </a><br>-->
         <!--<p>{{result.year}}</p>-->
@@ -83,12 +83,12 @@
         var num = 0;
         var lastNum = 0;
         var onOff = true;
-        num = book_rating_user;
-        aStxt.innerHTML = arrBtxt[parseInt(num/2)];
-        for (var i = 0; i <= book_rating_user; i++) {
-            //aBstar[i].style.backgroundPosition = "0 0";
-            aBstar[i].style.backgroundImage = "url(./static/img/star.png)";
-        }
+        // num = book_rating_user;
+        // aStxt.innerHTML = arrBtxt[parseInt(num/2)];
+        // for (var i = 0; i <= book_rating_user; i++) {
+        //     //aBstar[i].style.backgroundPosition = "0 0";
+        //     aBstar[i].style.backgroundImage = "url(./static/img/star.png)";
+        // }
         for (var i = 0; i < aBstar.length; i++) {
             aBstar[i].index = i;
             //鼠标移入
