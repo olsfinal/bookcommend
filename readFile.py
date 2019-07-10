@@ -8,7 +8,8 @@ def getItem(filename):
     with open(filename,'rb') as f:
         lines=str(f.read())
         # 行分隔符为\r\n ,同时去除多余的"
-        lines=lines.replace(r'"',"").split(r'\r\n')
+        # lines=lines.replace(r'"',"").split(r'\r\n')
+        lines=lines.replace(r'"',"").split(r'\n')
         # 返回内容，key为
         items={}
         for line in lines[1:len(lines)-1]:
@@ -36,13 +37,17 @@ def getRating():
     # f = open(filename, "rb")
     with open('ratings.csv','rb') as f:
         lines = str(f.read())
+
         # 行分隔符为\r\n
-        lines = lines.split(r'\r\n')
+        # lines = lines.split(r'\r\n')
+        lines = lines.split(r'\n')
+        # print(lines)
         # 返回内容，key为
         users = {}
         books = {}
         for line in lines[1:len(lines) - 1]:
             item = line.split(";")
+            # print(item)
             # 存储为user-rating和book-rating的两张字典
             if item[0] not in users:
                 users[item[0]] = {item[1]:eval(item[2])}
@@ -81,5 +86,13 @@ def countKeys(dic):
 
 # book=getItem("BX-Books.csv")
 # print(book)
-# users,books=getRating()
+users,books=getRating()
+# print(books)
+# if '0743482808' in users['246915']:
+#     print(1)
+# else:
+#     print(2)
+# items=books['0812539370']
+# avg = float(sum(items.values())) / len(items)
+# print(avg)
 # countKeys(books)

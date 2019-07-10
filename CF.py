@@ -99,5 +99,6 @@ def mostRecommend(data,n=10):
 # RES = topn_simliar('265889',userData)
 # print(RES)
 
+# print(bookData)
 # rcm=mostRecommend(bookData)
 # print(rcm)
