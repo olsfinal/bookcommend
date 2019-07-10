@@ -8,7 +8,7 @@ def getItem(filename):
     with open(filename,'rb') as f:
         lines=str(f.read())
         # 行分隔符为\r\n ,同时去除多余的"
-        lines=lines.replace(r'"',"").split(r'\r\n')
+        lines=lines.replace(r'"',"").replace(r'\r','').split(r'\n')
         # 返回内容，key为
         items={}
         for line in lines[1:len(lines)-1]:
@@ -37,7 +37,7 @@ def getRating():
     with open('ratings.csv','rb') as f:
         lines = str(f.read())
         # 行分隔符为\r\n
-        lines = lines.split(r'\r\n')
+        lines = lines.replace(r'\r','').split(r'\n')
         # 返回内容，key为
         users = {}
         books = {}
@@ -52,8 +52,8 @@ def getRating():
                 books[item[1]] = {item[0]:eval(item[2])}
             else:
                 books[item[1]][item[0]]=eval(item[2])
-        # for i in books:
-        #     print(books[i])
+        # for i in users:
+        #     print(i,users[i])
         # for j in count:
         #     print(j)
         # print(count)
@@ -82,4 +82,5 @@ def countKeys(dic):
 # book=getItem("BX-Books.csv")
 # print(book)
 # users,books=getRating()
+# print(users)
 # countKeys(books)

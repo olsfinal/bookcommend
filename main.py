@@ -274,7 +274,12 @@ def searchhistory():
         session['SearchHistory'] = ''
     if request.method == 'GET':
         if 'username' in session:
-            return render_template('searchhistory.html', results=session['SearchHistory'])
+            userHistory = userData['username']
+            results=[]
+            print(userHistory)
+            for i in userHistory:
+                results.append({'ISBN':i,'rating':userHistory[i]})
+            return render_template('searchhistory.html', results=results)
         else:
             return redirect(url_for('login'))
 
@@ -287,7 +292,18 @@ def songhistory():
         session['SongHistory'] = ''
     if request.method == 'GET':
         if 'username' in session:
-            return render_template('songhistory.html', results=session['SongHistory'])
+            print(session['username'])
+            userHistory = userData[session['username']]
+            results=[]
+            # print(userHistory)
+            for i in userHistory:
+                # print(books[i])
+                try:
+                    bookTitle=books[i][0]
+                    results.append({'ISBN':i,'title':bookTitle,'rating':userHistory[i]})
+                except:
+                    continue
+            return render_template('songhistory.html', results=results)
         else:
             return redirect(url_for('login'))
     elif request.method == 'POST':
