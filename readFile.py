@@ -81,6 +81,8 @@ def countKeys(dic):
 
 # book=getItem("BX-Books.csv")
 # print(book)
-# users,books=getRating()
-# print(users)
+users,books=getRating()
+print(users)
 # countKeys(books)
+
+# print(books['0671025864'])

@@ -64,7 +64,7 @@ def CFRecommend(user, data,n=10):
     # 相似度最高的用户
     items={}
     if user not in data:
-        return
+        return 0
     for i in range(5):
         items.update(data[topn_similar(user, data)[i][0]])
     # print(top_sim_user)
@@ -76,9 +76,21 @@ def CFRecommend(user, data,n=10):
     for item in items.keys():
         if item not in data[user].keys() and items[item]>=5:
             recommendations.append((item, items[item]))
+    if recommendations==[]:
+        return 0
     recommendations.sort(key=lambda val: val[1], reverse=True)  # 按照评分排序
     # 返回评分最高的10部电影
     return recommendations[:n]
+
+def subset(bookData,userData,ISBN):
+    bookRating=bookData[ISBN]
+    users=[i for i in bookRating.keys()]
+    userSubset={}
+    for i in users:
+        userSubset[i]=userData[i]
+    # print(userSubset)
+    return userSubset
+
 
 def mostRecommend(data,n=10):
     avg_data=[]
@@ -92,13 +104,18 @@ def mostRecommend(data,n=10):
     return avg_data[:n]
 
 
-
-# Recommendations = CFRecommend('262940', userData)
+# userSubset=subset(bookData,userData,'0671025864')
+# Recommendations = CFRecommend('262940', userSubset,n=1)
 # print(Recommendations)
 
-# RES = topn_simliar('265889',userData)
+# RES = topn_similar('265889',userData)
 # print(RES)
 
-# print(bookData)
+# print(userData)
 # rcm=mostRecommend(bookData)
 # print(rcm)
+
+# CFRating('262940',userData,'189317302X')
+
+# subset(bookData,'0671025864',userData)
+# print(subset(books,'0671025864'))
