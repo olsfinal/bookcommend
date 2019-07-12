@@ -104,9 +104,9 @@ def mostRecommend(data,n=10):
     return avg_data[:n]
 
 
-# userSubset=subset(bookData,userData,'0671025864')
-# Recommendations = CFRecommend('262940', userSubset,n=1)
-# print(Recommendations)
+userSubset=subset(bookData,userData,'0671025864')
+Recommendations = CFRecommend('262940', userSubset,n=1)
+print(Recommendations)
 
 # RES = topn_similar('265889',userData)
 # print(RES)
