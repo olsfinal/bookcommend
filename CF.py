@@ -46,6 +46,9 @@ def cosinDistance(item1,item2,items):
 
 #计算某个用户与其他用户的相似度
 def topn_similar(itemID, data, n=10):
+    l=len(data)
+    if l>n:
+        l=n
     data_copy=normalization(data)
     res = []
     for itemid in data.keys():
@@ -53,7 +56,9 @@ def topn_similar(itemID, data, n=10):
         if not itemid == itemID:
             # simliar = Euclidean(itemID,itemid,data)
             similar=cosinDistance(itemID,itemid,data_copy)
-            res.append((itemid,similar))
+            # print(similar)
+            if similar>0:
+                res.append((itemid,similar))
     res.sort(key=lambda val:val[1],reverse=True)
     # print(res)
     return res[:n]
@@ -82,6 +87,28 @@ def CFRecommend(user, data,n=10):
     # 返回评分最高的10部电影
     return recommendations[:n]
 
+def CFRating(userid,bookid,userdata,bookdata):
+    userSubset = subset(bookdata, userdata, bookid)
+    if userid not in userSubset:
+        # print('out',userid)
+        user=userdata[userid]
+        avg = float(sum(user.values())) / len(user)
+        return int(avg)
+    similar_users = topn_similar(userid, userSubset)
+    l=len(similar_users)
+    if l > 10:
+        l=10
+    # 相似度最高的用户
+    ratings=[]
+    # print(similar_users)
+    for i in range(l):
+        ratings.append(userdata[similar_users[i][0]][bookid])
+    # 筛选出该用户未观看的电影并添加到列表中
+    print(ratings)
+    res=round(float(sum(ratings))/len(ratings))  # 按照评分排序
+    # 返回评分最高的10部电影
+    return res
+
 def subset(bookData,userData,ISBN):
     bookRating=bookData[ISBN]
     users=[i for i in bookRating.keys()]
@@ -104,9 +131,11 @@ def mostRecommend(data,n=10):
     return avg_data[:n]
 
 
-userSubset=subset(bookData,userData,'0671025864')
-Recommendations = CFRecommend('262940', userSubset,n=1)
-print(Recommendations)
+# userSubset=subset(bookData,userData,'0880386525')
+# print(userSubset)
+res = CFRating('253821','0425128164', userData,bookData)
+# print('res',res)
+# print(Recommendations)
 
 # RES = topn_similar('265889',userData)
 # print(RES)
