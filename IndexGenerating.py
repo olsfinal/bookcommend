@@ -13,7 +13,7 @@ import readFile
 # index_filepath=dirpath+"index/"
 # source_filepath=index_filepath+"0407_songs_dr2.csv"
 readFile.getItem("BX-Books.csv")
-analyser = ChineseAnalyzer()  # 导入中文分词工具
+# analyser = ChineseAnalyzer()  # 导入中文分词工具
 schema = Schema(ISBN=TEXT(stored=True,sortable=True),
                 book_title=TEXT(stored=True,sortable=True),
                 book_author=TEXT(stored=True,sortable=True),

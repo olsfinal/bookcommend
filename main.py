@@ -59,6 +59,8 @@ def introcution():
         name = None
     ISBN=request.args.get('ISBN')
     # print(1)
+    session['ISBN']=ISBN
+    # session.update
     print(ISBN)
     results=[]
     detail = books[ISBN]
@@ -71,15 +73,15 @@ def introcution():
     # book_rating_user = userData[name][ISBN]
     if name!=None:
         if ISBN not in userData[name]:
-            book_rating_user=0
+            book_rating_user="无"
         else:
             book_rating_user = userData[name][ISBN]
     else:
-        book_rating_user=0
+        book_rating_user="无"
     # items = books[ISBN]
     # book_rating_all = float(sum(items.values())) / len(items)
-    if books[ISBN]==None:
-        book_rating_all=0
+    if ISBN not in bookData:
+        book_rating_all="无"
     else:
         items = bookData[ISBN]
         book_rating_all = round(float(sum(items.values())) / len(items),2)
@@ -222,8 +224,14 @@ def basicshow():
 def star():
     if request.method == 'POST':
         value = request.form['Rank']
+        # value = request.form['ISBN']
         print(value)
         #数据库处理部分
+        name = session['username']
+        ISBN = session['ISBN']
+        # print(1)
+        print(ISBN)
+        userData[name][ISBN]=eval(value)
         return ''
 
 

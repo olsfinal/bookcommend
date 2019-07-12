@@ -60,7 +60,7 @@
         <b class="ct-star  ic-star-off"></b>
         <b class="ct-star  ic-star-off"></b>
         <b class="ct-star  ic-star-off"></b>
-        <button class="btn btn-primary" type="submit">确定</button>
+        <!--<button class="btn btn-primary" type="submit">确定</button>-->
         <!--<button class="btn btn-primary" type="submit" id="clear">清空</button>-->
         </span>
         <h4>你的评分：{{book_rating_user}}</h4>
@@ -74,7 +74,7 @@
 </div>
 </body>
 <script>
-    window.onload = function (book_rating_user) {
+    window.onload = function () {
         var aSpan = document.getElementsByClassName("star")[0];
         var aStxt = document.getElementsByClassName("star-txt")[0];
         var aBstar = aSpan.getElementsByTagName("b");
