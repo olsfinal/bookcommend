@@ -92,8 +92,10 @@ def CFRating(userid,bookid,userdata,bookdata):
     if userid not in userSubset:
         # print('out',userid)
         user=userdata[userid]
-        avg = float(sum(user.values())) / len(user)
-        return int(avg)
+        book=bookdata[bookid]
+        user_avg = float(sum(user.values())) / len(user)
+        book_avg = float(sum(book.values())) / len(book)
+        return user_avg
     similar_users = topn_similar(userid, userSubset)
     l=len(similar_users)
     if l > 10:
